@@ -1,0 +1,37 @@
+.share {
+  position: absolute;
+  top: 180px;
+  left: -180px;
+  flex-direction: column;
+  display: flex;
+  animation: share 2s;
+  gap: 10px;
+  list-style-type: none;
+
+  p {
+    font-size: 12px;
+    color: #4e6a8d;
+    font-weight: 600;
+  }
+
+  .shareItem {
+    cursor: pointer;
+    .icon {
+      border-radius: 4px;
+      font-size: 40px;
+    }
+    &:hover {
+      transform: scale(1.1);
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+@keyframes share {
+  0% {
+    top: 100px;
+  }
+  100% {
+    top: 180px;
+  }
+}

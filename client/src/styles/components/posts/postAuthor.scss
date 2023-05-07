@@ -1,0 +1,13 @@
+.postAuthor {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 6px 0 10px 0;
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+  }
+}
