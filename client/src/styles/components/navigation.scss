@@ -1,19 +1,19 @@
 .navigation {
-  margin-bottom: 20px;
-  .navigationContainer {
+  margin-bottom: 30px;
+  .navigation-container {
     max-width: 1070px;
     margin: 0 auto;
 
-    .navigationTop {
+    .navigation-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      .navigationRight {
+      .navigation-right {
         display: flex;
         align-items: center;
         gap: 40px;
 
-        .navigationItem {
+        .navigation-item {
           background-color: #ebecfc;
           width: 40px;
           height: 40px;
@@ -34,12 +34,12 @@
       }
     }
 
-    .navigationBottom.active {
+    .navigation-bottom.active {
       height: 45px;
       overflow: visible;
     }
 
-    .navigationBottom {
+    .navigation-bottom {
       flex: 1;
       height: 0;
       overflow: hidden;

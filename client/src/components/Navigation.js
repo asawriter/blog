@@ -14,14 +14,14 @@ const Navigation = () => {
 
   return (
     <div className="navigation">
-      <div className="navigationContainer">
-        <div className="navigationTop">
+      <div className="navigation-container">
+        <div className="navigation-top">
           <Categories />
-          <div className="navigationRight">
-            <div className="navigationItem">
+          <div className="navigation-right">
+            <div className="navigation-item">
               <GrSearch className="icon" onClick={handleOpenSearch} />
             </div>
-            <div className="navigationItem showMenuOptions">
+            <div className="navigation-item showMenuOptions">
               <GrMenu
                 className="icon"
                 onClick={() => setMenuOptions(!showMenuOptions)}
@@ -35,7 +35,7 @@ const Navigation = () => {
         </div>
         <div
           className={
-            showSearch ? "navigationBottom active" : "navigationBottom"
+            showSearch ? "navigation-bottom active" : "navigation-bottom"
           }
         >
           <Search setShowSearch={setShowSearch} />

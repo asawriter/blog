@@ -1,5 +1,6 @@
 import path from "node:path";
-import cloudinary from "../config/cloudinary.js";
+import cloudinary from "../config/cloudinary.js"
+
 import DatauriParser from "datauri/parser.js";
 
 const parser = new DatauriParser();

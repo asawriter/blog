@@ -20,6 +20,7 @@ const Categories = () => {
       <li onClick={() => handleLink("Cyber Attacks")}>Cyber Attacks</li>
       <li onClick={() => handleLink("Vulnerablilities")}>Vulnerablilities</li>
       <li onClick={() => handleLink("Webinars")}>Webinars</li>
+      <li onClick={() => handleLink("Webinars")}>Contact</li>
     </ul>
   );
 };

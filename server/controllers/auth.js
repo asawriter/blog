@@ -1,4 +1,9 @@
-import { registerValidator, uploadToCloudinary } from "../utils/index.js";
+import {
+  comparePw,
+  hashPw,
+  registerValidator,
+  uploadToCloudinary,
+} from "../utils/index.js";
 import User from "../models/User.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -28,11 +33,14 @@ export const register = async (req, res, next) => {
     // handle avatar user ?
     const imageUrl = await uploadToCloudinary(req.file);
 
+    // hash password
+    const pwHashed = await hashPw(password);
+
     // create new user
     const createdUser = await User.create({
       name,
       email,
-      password,
+      password: pwHashed,
       avatar: imageUrl,
     });
 
@@ -68,7 +76,7 @@ export const login = async (req, res, next) => {
     if (!user) throw createError.NotFound("User does not exists.");
 
     // check password is valid ?
-    const isMatch = await user.isValidPassword(req.body.password);
+    const isMatch = await comparePw(req.body.password, user.password);
     if (!isMatch)
       throw createError.Unauthorized("Email or password is incorrect.");
 
@@ -87,6 +95,7 @@ export const login = async (req, res, next) => {
         location: user.location,
         joinDate: user.joinDate,
         accessToken: accessToken,
+        // refreshToken: refreshToken,
       },
     });
   } catch (error) {
@@ -116,13 +125,12 @@ export const generateNewToken = async (req, res, next) => {
 
     const userId = await verifyRefreshToken(refreshToken);
 
-    const currentTime = Math.floor(Date.now() / 1000);
-    if (req.payload.exp > currentTime) {
-      const newAccessToken = await signAccessToken(userId);
-      const newRefreshToken = await signRefreshToken(userId);
+    const newAccessToken = await signAccessToken(userId);
+    const newRefreshToken = await signRefreshToken(userId);
 
-      res.send({ accessToken: newAccessToken, refreshToken: newRefreshToken });
-    }
+    res
+      .status(200)
+      .json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
   } catch (error) {
     next(error);
   }
@@ -139,7 +147,7 @@ export const logout = async (req, res, next) => {
         throw createError.InternalServerError();
       }
       console.log(val);
-      res.sendStatus(204);
+      res.status(204).json({ message: "You have been logged out" });
     });
   } catch (error) {
     next(error);

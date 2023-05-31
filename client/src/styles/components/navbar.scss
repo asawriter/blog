@@ -1,13 +1,14 @@
 .navbar {
   background-color: #3732b3;
-  .container {
+  .navbar-container {
+    height: 77px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     max-width: 1070px;
     margin: 0 auto;
-    padding: 20px 0;
-    justify-content: space-between;
 
-    .left {
+    .navbar-logo {
       img {
         width: 425px;
         height: 46px;
@@ -15,44 +16,30 @@
       }
     }
 
-    .right {
+    .navbar-subcribe {
       display: flex;
       align-items: center;
-      gap: 20px;
-
-      button {
-        padding: 8px 16px;
-        border: none;
-        color: #3732b3;
-        background-color: white;
-        font-weight: 500;
-        cursor: pointer;
-        border-radius: 20px;
-        font-size: 16px;
-        &:hover {
-          opacity: 0.8;
-          transition: all 0.3s ease;
-        }
-      }
-
-      span {
-        color: blue;
-        text-decoration: underline;
-        cursor: pointer;
-      }
+      gap: 10px;
+      height: 40px;
+      background-color: #ffdb4d;
+      padding: 0 12px;
+      border-radius: 3px;
+      cursor: pointer;
 
       p {
-        width: 32px;
-        height: 32px;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #ebecfc;
+        font-weight: 600;
+      }
+    }
 
-        .icon {
-          font-size: 22px;
-        }
+    .navbar-auth {
+      button {
+        padding: 8px 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: 20px;
+        background-color: #ffdb4d;
       }
     }
   }

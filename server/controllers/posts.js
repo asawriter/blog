@@ -2,7 +2,7 @@ import Post from "../models/Post.js";
 import User from "../models/User.js";
 import { uploadToCloudinary } from "../utils/index.js";
 import dotenv from "dotenv";
-import { getViewCount } from "../config/redis.js";
+import { getViewCount } from "../helpers/redis.js";
 dotenv.config();
 
 const {

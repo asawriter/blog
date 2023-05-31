@@ -5,7 +5,7 @@ import {
   AiFillFacebook,
   AiFillYoutube,
 } from "react-icons/ai";
-import FooterItem from "./FooterItem";
+import { data1 } from "./footerData";
 
 const Footer = () => {
   return (
@@ -55,10 +55,19 @@ const Footer = () => {
         </ul>
 
         <ul className="footerList">
-          <FooterItem />
-          <FooterItem />
-          <FooterItem />
+          {data1.map((item, index) => (
+            <div className="footerItem" key={index}>
+              <h3>{item.title}</h3>
+              {item.arr.map((a, i) => (
+                <p key={i}>{a}</p>
+              ))}
+            </div>
+          ))}
         </ul>
+
+        <p className="subFooter">
+          © The Hacker News, 2023. All Rights Reserved.
+        </p>
       </div>
     </div>
   );

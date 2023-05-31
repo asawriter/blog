@@ -1,15 +1,13 @@
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import makeRequest from "../services/makeRequest";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "react-router-dom";
 import Post from "../components/posts/Post";
 import ProfileName from "../components/ProfileName";
 import Loading from "../components/Loading";
-import { AuthContext } from "../context/AuthContext";
 
 const Profile = () => {
   const userId = useLocation().pathname?.split("/")[2];
-  const { currentUser } = useContext(AuthContext);
 
   const getUserProfile = (userId) =>
     makeRequest.get(`/users/${userId}`).then((res) => res.data.user);

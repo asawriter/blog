@@ -1,7 +1,7 @@
 .post {
-  height: 150px;
+  height: 160px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 
   &:hover {
     h1 {
@@ -12,13 +12,13 @@
   .postContainer {
     height: 100%;
     display: flex;
-    border: 5px solid white;
+    border: 8px solid white;
     border-top: none;
     border-left: none;
     border-radius: 4px;
     &:hover {
-      transition: all 0.2s ease;
-      border: 5px solid #e2ebff;
+      transition: all 0.2s linear;
+      border: 8px solid #e2ebff;
       border-top: none;
       border-left: none;
     }

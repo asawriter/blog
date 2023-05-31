@@ -1,17 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import makeRequest from "../services/makeRequest";
+import makeRequest from "../../services/makeRequest";
+import Title from "../Title";
+import Loading from "../Loading";
 import { Link } from "react-router-dom";
-import Title from "./Title";
-import Loading from "./Loading";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
 
 const BreakingNews = () => {
-  const { currentUser } = useContext(AuthContext);
   const { isLoading, data, error } = useQuery(["breaking"], () =>
-    makeRequest
-      .get("/posts/breaking")
-      .then((res) => res.data.posts)
+    makeRequest.get("/posts/breaking").then((res) => res.data.posts)
   );
 
   return (

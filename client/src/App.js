@@ -20,6 +20,9 @@ import Register from "./pages/Register";
 import PostPage from "./pages/PostPage";
 import PostSearch from "./pages/PostSearch";
 import PostSaved from "./pages/PostSaved";
+import Sub from "./components/Sub";
+import EmailBox from "./components/EmailBox";
+import Footer from "./components/footers/Footer";
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
@@ -30,6 +33,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <Sub />
       <NavBar />
       {currentUser?.accessToken && <Navigation />}
       <Routes>
@@ -48,6 +52,12 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+      {currentUser?.accessToken && (
+        <>
+          <EmailBox />
+          <Footer />
+        </>
+      )}
     </BrowserRouter>
   );
 };

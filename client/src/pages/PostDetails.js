@@ -7,10 +7,9 @@ import PostAuthor from "../components/posts/PostAuthor";
 import Title from "../components/Title";
 import CreateComment from "../components/comments/createComment/CreateComment";
 import ListComment from "../components/comments/ListComment";
-import Trending from "../components/Trending";
-import BreakingNews from "../components/BreakingNews";
+import Trending from "../components/postsAll/Trending";
+import BreakingNews from "../components/postsAll/BreakingNews";
 import Share from "../components/Share";
-import Footer from "../components/footers/Footer";
 import { RiEditBoxLine, RiDeleteBinLine } from "react-icons/ri";
 import { AiOutlineEye } from "react-icons/ai";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
@@ -27,9 +26,7 @@ const PostDetails = () => {
   const { currentUser, loading, setLoading } = useContext(AuthContext);
   const postId = useLocation().pathname?.split("/")[3];
   const { isLoading, data, error } = useQuery(["post", postId], () =>
-    makeRequest.get(`/posts/${postId}`).then((res) => {
-      return res.data.post;
-    })
+    makeRequest.get(`/posts/${postId}`).then((res) => res.data.post)
   );
 
   const handleOpenDialog = () => {
@@ -178,7 +175,6 @@ const PostDetails = () => {
         <Share />
       </div>
       <BreakingNews />
-      <Footer />
     </div>
   );
 };

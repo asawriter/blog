@@ -1,4 +1,4 @@
-import client from "../helpers/connectRedis.js"
+import client from "./connectRedis.js"
 import Post from "../models/Post.js";
 
 export const getViewCount = async (postId) => {

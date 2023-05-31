@@ -4,7 +4,7 @@
   .footerContainer {
     max-width: 1070px;
     margin: 0 auto;
-    padding: 40px 0;
+    padding-top: 40px;
 
     h2 {
       text-align: center;
@@ -29,9 +29,9 @@
           font-size: 50px;
           border-radius: 4px;
 
-          &:hover{
+          &:hover {
             transform: scale(1.1);
-            transition: all .2s ease;
+            transition: all 0.2s ease;
           }
         }
 
@@ -67,6 +67,15 @@
           }
         }
       }
+    }
+
+    .subFooter {
+      color: #4e6a8d;
+      font-size: 12px;
+      height: 35px;
+      line-height: 35px;
+      border-top: 2px solid #e2e7fd;
+      margin-top: 20px;
     }
   }
 }

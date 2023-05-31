@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import makeRequest from "../../../services/makeRequest";
-import { AuthContext } from "../../../context/AuthContext";
 
 const CreateComment = ({
   parentPost,
@@ -13,13 +12,9 @@ const CreateComment = ({
 }) => {
   const [content, setContent] = useState("");
   const queryClient = useQueryClient();
-  const { currentUser } = useContext(AuthContext);
 
   const mutaion = useMutation(
-    async (newCm) =>
-      await makeRequest.post("/comments", newCm, {
-        headers: { Authorization: `Bearer ${currentUser.accessToken}` },
-      }),
+    async (newCm) => await makeRequest.post("/comments", newCm),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["post", parentPost]);

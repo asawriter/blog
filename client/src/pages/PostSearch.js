@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 
 const PostSearch = () => {
-  const { searchValue, currentUser } = useContext(AuthContext);
+  const { searchValue } = useContext(AuthContext);
 
   const { isLoading, data, error } = useQuery(["search", searchValue], () =>
     makeRequest

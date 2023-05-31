@@ -41,7 +41,7 @@ const Comment = ({ comment, data }) => {
             <Link
               to={`/users/${comment.author?._id}`}
               className="link"
-              reloadDocument
+              // reloadDocument
             >
               <b>{comment.author?.name}</b>
             </Link>

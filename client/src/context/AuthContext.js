@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import makeRequest from "../services/makeRequest";
+import axios from "axios";
+
 export const AuthContext = createContext();
-import jwtDecode from "jwt-decode"
 
 export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
@@ -9,39 +9,50 @@ export const AuthContextProvider = ({ children }) => {
   const [searchValue, setSearchValue] = useState("");
   const [cat, setCat] = useState("All");
 
-  // auth state
-  const [currentUser, setCurrentUser] = useState(
+  let [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("userData")) || {}
   );
-  const [refreshToken, setRefreshToken] = useState(null);
+
+  // (async () => {
+  //   const res = await axios.get(
+  //     `http://localhost:5000/auth/${currentUser?.userId}/refresh-token`
+  //   );
+  //   setRefreshToken(res.data.refreshToken);
+  // })();
 
   useEffect(() => {
     localStorage.setItem("userData", JSON.stringify(currentUser));
-    const getRefreshToken = async () => {
-      const res = await makeRequest.get(
-        `/users/${currentUser?.userId}/refresh-token`
-      );
-      setRefreshToken(res.data.refreshToken);
-    };
-    getRefreshToken();
   }, [currentUser]);
 
-  useEffect(()=> {
-    const decoded = jwtDecode(currentUser?.accessToken);
-    const tokenExpirationTime = decoded.exp;
-    
-  })
+  const login = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:5000/auth/login", data);
+      if (res.status === 200) {
+        setCurrentUser(res.data.user);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const register = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:5000/auth/register", data);
+      if (res.status === 200) {
+        setCurrentUser(res.data.user);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-
-
-
-
-
-
-
-  const logout = async () => {
-    localStorage.removeItem("userData");
+  const logout = async (refreshToken) => {
+    try {
+      await axios.delete("http://localhost:5000/auth/logout", { refreshToken });
+      localStorage.removeItem("userData");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -58,6 +69,8 @@ export const AuthContextProvider = ({ children }) => {
         loading,
         setLoading,
         logout,
+        login,
+        register,
       }}
     >
       {children}

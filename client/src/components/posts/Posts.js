@@ -21,7 +21,7 @@ const Posts = ({ isLoading, error, posts }) => {
       ) : error ? (
         <p>Something went wrong...</p>
       ) : (
-        posts.map((post) => (
+        posts?.map((post) => (
           <Link
             key={post._id}
             to={`/posts/${post.title}/${post._id}`}

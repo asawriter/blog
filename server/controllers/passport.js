@@ -2,7 +2,7 @@ import passport from "passport";
 import googleOauth from "passport-google-oauth20";
 import dotenv from "dotenv";
 import User from "../models/User.js";
-import { hashPw } from "../utils/index.js";
+import bcrypt from "bcryptjs";
 dotenv.config();
 
 const GoogleStrategy = googleOauth.Strategy;
@@ -27,7 +27,7 @@ passport.use(
           return done(null, existingUser);
         }
 
-        const hashedPw = await hashPw(email + name + email);
+        const hashedPw = await bcrypt.hash(email + name + email, 10);
         const newUser = new User({
           name,
           email,

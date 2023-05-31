@@ -35,7 +35,7 @@ services:
       - .:/usr/src/app/server
     environment:
       PORT: 5000
-      MONGO_URL: mongodb+srv://asawriter:asawriter95@blog.34ldcgb.mongodb.net/?retryWrites=true&w=majority
+      MONGO_URL: process.env.MONGO_URL
       REDIS_HOST: cache
       REDIS_PORT: 6379
     depends_on:

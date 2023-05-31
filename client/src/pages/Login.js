@@ -2,12 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../components/Loading";
-import makeRequest from "../services/makeRequest";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setCurrentUser, setLoading, loading } = useContext(AuthContext);
+  const { setLoading, loading, login } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -15,8 +14,8 @@ const Login = () => {
     e.preventDefault();
 
     setLoading(true);
-    const res = await makeRequest.post("/auth/login", { email, password });
-    setCurrentUser(res.data.user);
+    await login({ email, password });
+
     setLoading(false);
     navigate("/");
   };

@@ -9,17 +9,30 @@ import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "./Loading";
+import makeRequest from "../services/makeRequest";
 
 const MenuOptions = ({ showMenuOptions, setMenuOptions }) => {
   const { currentUser, loading, setLoading, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogout = async() => {
-    setLoading(true);
-    logout();
-    setLoading(false);
-    window.location.reload();
-    navigate("/login");
+  const handleLogout = async () => {
+    // setLoading(true);
+    try {
+      const refreshToken = await makeRequest.get(
+        `/auth/${currentUser.userId}/refresh-token`
+      );
+
+      console.log(refreshToken);
+
+      if (refreshToken) {
+        await logout(refreshToken);
+      }
+
+      setLoading(false);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (loading) return <Loading />;
