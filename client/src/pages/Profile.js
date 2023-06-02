@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import Post from "../components/posts/Post";
 import ProfileName from "../components/ProfileName";
 import Loading from "../components/Loading";
+import { scroll } from "../utils/scroll";
 
 const Profile = () => {
   const userId = useLocation().pathname?.split("/")[2];
@@ -55,7 +56,7 @@ const Profile = () => {
                   className="link"
                   to={`/posts/${post.title}/${post._id}`}
                   key={post._id}
-                  reloadDocument
+                  onClick={scroll}
                 >
                   <Post post={post} />
                 </Link>

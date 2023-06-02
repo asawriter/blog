@@ -13,13 +13,6 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("userData")) || {}
   );
 
-  // (async () => {
-  //   const res = await axios.get(
-  //     `http://localhost:5000/auth/${currentUser?.userId}/refresh-token`
-  //   );
-  //   setRefreshToken(res.data.refreshToken);
-  // })();
-
   useEffect(() => {
     localStorage.setItem("userData", JSON.stringify(currentUser));
   }, [currentUser]);
@@ -46,15 +39,6 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const logout = async (refreshToken) => {
-    try {
-      await axios.delete("http://localhost:5000/auth/logout", { refreshToken });
-      localStorage.removeItem("userData");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <AuthContext.Provider
       value={{
@@ -68,7 +52,6 @@ export const AuthContextProvider = ({ children }) => {
         setSearchValue,
         loading,
         setLoading,
-        logout,
         login,
         register,
       }}

@@ -3,8 +3,9 @@ import { MdEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
-const NavBar = () => {
+const NavBar = ({ scrollToEmailBox }) => {
   const { currentUser } = useContext(AuthContext);
+
   return (
     <div className="navbar">
       <div className="navbar-container">
@@ -18,12 +19,10 @@ const NavBar = () => {
         </div>
 
         {currentUser.userId ? (
-          <Link to="/posts/new" className="link">
-            <div className="navbar-subcribe">
-              <MdEmail />
-              <p>Subscribe to Newletter</p>
-            </div>
-          </Link>
+          <div className="navbar-subcribe" onClick={scrollToEmailBox}>
+            <MdEmail />
+            <p>Subscribe to Newletter</p>
+          </div>
         ) : (
           <div className="navbar-auth">
             <Link to="/login">

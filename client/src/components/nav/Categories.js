@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
+import { scroll } from "../../utils/scroll";
 
 const Categories = () => {
   const { setCat, page } = useContext(AuthContext);
@@ -9,10 +10,10 @@ const Categories = () => {
     setCat(cat);
     navigate(`/posts?page=${page}&cat=${cat}`);
   };
-  
+
   return (
     <ul className="categories">
-      <Link to="/" className="link" reloadDocument>
+      <Link to="/" className="link" onClick={scroll}>
         <li>Home</li>
       </Link>
 
@@ -20,7 +21,9 @@ const Categories = () => {
       <li onClick={() => handleLink("Cyber Attacks")}>Cyber Attacks</li>
       <li onClick={() => handleLink("Vulnerablilities")}>Vulnerablilities</li>
       <li onClick={() => handleLink("Webinars")}>Webinars</li>
-      <li onClick={() => handleLink("Webinars")}>Contact</li>
+      <Link to="/contact" className="link" onClick={scroll}>
+        <li>Contact</li>
+      </Link>
     </ul>
   );
 };

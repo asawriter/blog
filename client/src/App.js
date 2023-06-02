@@ -5,10 +5,9 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AuthContext } from "./context/AuthContext";
 import "./styles/index.scss";
-import Navigation from "./components/Navigation";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -21,24 +20,32 @@ import PostPage from "./pages/PostPage";
 import PostSearch from "./pages/PostSearch";
 import PostSaved from "./pages/PostSaved";
 import Sub from "./components/Sub";
-import EmailBox from "./components/EmailBox";
-import Footer from "./components/footers/Footer";
+import Navigation from "./components/nav/Navigation";
+import ContactUs from "./components/ContactUs";
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
+  const emailBoxRef = useRef();
 
   const PrivateRoute = () => {
     return currentUser?.accessToken ? <Outlet /> : <Navigate to="/login" />;
   };
 
+  const scrollToEmailBox = () => {
+    window.scrollTo({
+      behavior: "smooth",
+      top: emailBoxRef.current?.offsetTop,
+    });
+  };
+
   return (
     <BrowserRouter>
       <Sub />
-      <NavBar />
+      <NavBar scrollToEmailBox={scrollToEmailBox} />
       {currentUser?.accessToken && <Navigation />}
       <Routes>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home emailBoxRef={emailBoxRef} />} />
           <Route path="/posts" element={<PostPage />} />
           <Route path="/users/:userId" element={<Profile />} />
           <Route path="/users/:userId/edit" element={<EditProfile />} />
@@ -46,18 +53,16 @@ const App = () => {
           <Route path="/users/:userId/notification" />
           <Route path="/posts/new" element={<NewPost />} />
           <Route path="/posts/saved" element={<PostSaved />} />
-          <Route path="/posts/:titleUrl/:postId" element={<PostDetails />} />
+          <Route
+            path="/posts/:titleUrl/:postId"
+            element={<PostDetails emailBoxRef={emailBoxRef} />}
+          />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="/posts/:titleUrl/:postId/edit" />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-      {currentUser?.accessToken && (
-        <>
-          <EmailBox />
-          <Footer />
-        </>
-      )}
     </BrowserRouter>
   );
 };

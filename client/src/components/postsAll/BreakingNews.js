@@ -3,6 +3,7 @@ import makeRequest from "../../services/makeRequest";
 import Title from "../Title";
 import Loading from "../Loading";
 import { Link } from "react-router-dom";
+import { scroll } from "../../utils/scroll";
 
 const BreakingNews = () => {
   const { isLoading, data, error } = useQuery(["breaking"], () =>
@@ -24,7 +25,7 @@ const BreakingNews = () => {
                 className="link"
                 to={`/posts/${post.title}/${post._id}`}
                 key={post._id}
-                reloadDocument
+                onClick={scroll}
               >
                 <li className="breakingItem">
                   <div className="breakingImg">

@@ -3,6 +3,7 @@ import Post from "./Post";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import Loading from "../Loading";
+import { scroll } from "../../utils/scroll";
 
 const Posts = ({ isLoading, error, posts }) => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Posts = ({ isLoading, error, posts }) => {
             key={post._id}
             to={`/posts/${post.title}/${post._id}`}
             className="link"
-            reloadDocument
+            onClick={scroll}
           >
             <Post post={post} />
           </Link>

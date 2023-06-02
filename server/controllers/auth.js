@@ -61,7 +61,7 @@ export const register = async (req, res, next) => {
         location: user.location,
         joinDate: user.joinDate,
         accessToken: accessToken,
-        // refreshToken: refreshToken,
+        refreshToken: refreshToken,
       },
     });
   } catch (error) {
@@ -95,7 +95,7 @@ export const login = async (req, res, next) => {
         location: user.location,
         joinDate: user.joinDate,
         accessToken: accessToken,
-        // refreshToken: refreshToken,
+        refreshToken: refreshToken,
       },
     });
   } catch (error) {
@@ -111,7 +111,7 @@ export const getRefreshToken = async (req, res, next) => {
         console.log(err.message);
         throw createError.InternalServerError();
       }
-      res.send({ refreshToken: result });
+      return res.status(200).json({ refreshToken: result });
     });
   } catch (error) {
     next(error);
@@ -141,13 +141,14 @@ export const logout = async (req, res, next) => {
     const { refreshToken } = req.body;
     const userId = await verifyRefreshToken(refreshToken);
 
-    client.del(userId, (err, val) => {
+    await client.del(userId, (err, val) => {
       if (err) {
-        console.log(err.message);
-        throw createError.InternalServerError();
+        // console.log(err.message, "deleted");
+        // throw createError.InternalServerError();
+        return res.status(500).json({message: "loi logout", err})
       }
-      console.log(val);
-      res.status(204).json({ message: "You have been logged out" });
+      // console.log(val);
+      return res.status(200).json({ message: "You have been logged out", val });
     });
   } catch (error) {
     next(error);

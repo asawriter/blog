@@ -7,9 +7,10 @@ import {
 import { BsBookmarkHeart } from "react-icons/bs";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import Loading from "./Loading";
-import makeRequest from "../services/makeRequest";
+import { AuthContext } from "../../context/AuthContext";
+import Loading from "../Loading";
+import makeRequest from "../../services/makeRequest";
+import axios from "axios";
 
 const MenuOptions = ({ showMenuOptions, setMenuOptions }) => {
   const { currentUser, loading, setLoading, logout } = useContext(AuthContext);
@@ -18,20 +19,23 @@ const MenuOptions = ({ showMenuOptions, setMenuOptions }) => {
   const handleLogout = async () => {
     // setLoading(true);
     try {
-      const refreshToken = await makeRequest.get(
+      const res = await makeRequest.get(
         `/auth/${currentUser.userId}/refresh-token`
       );
 
-      console.log(refreshToken);
+      const refreshToken = res.data.refreshToken;
+      console.log(refreshToken)
 
-      if (refreshToken) {
-        await logout(refreshToken);
-      }
+      const ok = await makeRequest.delete(`/auth/logout`, {
+        refreshToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc3Njg0MDExODA4NWVkMjQ0NmQ0NzkiLCJpYXQiOjE2ODU2MzI3NTMsImV4cCI6MTcxNzE5MDM1M30.2CI-ubUgy7Q3Jy4z-z-BstIAqDe_ALRg2A80yHpk43Y",
+      });
+      console.log(ok);
 
-      setLoading(false);
-      navigate("/login");
+      // setLoading(false);
+      // navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.log(error, "my-err");
     }
   };
 

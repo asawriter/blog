@@ -11,7 +11,7 @@ const router = Router();
 
 export const routes = () => {
   router.use("/auth", authRoute);
-  router.use(verifyAccessToken);
+  // router.use(verifyAccessToken);
   router.use("/users", userRoute);
   router.use("/upload", uploadRoute);
   router.use("/posts", postRoute);

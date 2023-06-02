@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Title from "../Title";
 import makeRequest from "../../services/makeRequest";
 import Loading from "../Loading";
+import { scroll } from "../../utils/scroll";
 
 const PopularResource = () => {
   const { isLoading, data, error } = useQuery(["trending"], () =>
@@ -23,7 +24,7 @@ const PopularResource = () => {
               key={trend._id}
               className="link"
               to={`/posts/${trend.title}/${trend._id}`}
-              reloadDocument
+              onClick={scroll}
             >
               <div className="pr-item">
                 <div className="pr-img">

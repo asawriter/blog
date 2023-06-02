@@ -1,6 +1,6 @@
-const EmailBox = () => {
+const EmailBox = ({ emailBoxRef }) => {
   return (
-    <div className="emailBox">
+    <div className="emailBox" ref={emailBoxRef}>
       <div className="emailBox-container">
         <h2>Join 120,000+ Professional</h2>
         <p>

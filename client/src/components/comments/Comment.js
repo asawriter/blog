@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import CreateComment from "./createComment/CreateComment";
 import { AuthContext } from "../../context/AuthContext";
 import { getReplyComments } from "../../services";
+import { scroll } from "../../utils/scroll";
 
 const Comment = ({ comment, data }) => {
   const { currentUser } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const Comment = ({ comment, data }) => {
         <Link
           to={`/users/${comment.author?._id}`}
           className="link"
-          reloadDocument
+          onClick={scroll}
         >
           <img src={comment.author?.avatar} alt="" />
         </Link>
@@ -41,7 +42,7 @@ const Comment = ({ comment, data }) => {
             <Link
               to={`/users/${comment.author?._id}`}
               className="link"
-              // reloadDocument
+              onClick={scroll}
             >
               <b>{comment.author?.name}</b>
             </Link>

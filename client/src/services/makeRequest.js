@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 const baseURL = "http://localhost:5000";
 
@@ -7,13 +8,35 @@ const makeRequest = axios.create({
   withCredentials: true,
 });
 
+const user = JSON.parse(localStorage.getItem("userData"));
+
+const refreshNewToken = async () => {
+  try {
+    const res = await makeRequest.post("/auth/refresh-token", {
+      refreshToken: user && user.refreshToken,
+    });
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({
+        ...user,
+        accessToken: res.data.accessToken,
+        refreshToken: res.data.refreshToken,
+      })
+    );
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 makeRequest.interceptors.request.use(
-  (config) => {
-    const accessToken = JSON.parse(
-      localStorage.getItem("userData")
-    ).accessToken;
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+  async (config) => {
+    let currentDate = new Date();
+    const decodedToken = user && jwtDecode(user.accessToken);
+    if (decodedToken?.exp * 1000 < currentDate) {
+      const data = await refreshNewToken();
+      config.headers["Authorization"] = "Bearer " + data?.accessToken;
     }
     return config;
   },

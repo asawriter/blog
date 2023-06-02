@@ -17,8 +17,10 @@ import BoxConfirm from "../components/BoxConfirm";
 import NewPost from "./NewPost";
 import PostImg from "../components/posts/PostImg";
 import Loading from "../components/Loading";
+import EmailBox from "../components/EmailBox";
+import Footer from "../components/footers/Footer";
 
-const PostDetails = () => {
+const PostDetails = ({ emailBoxRef }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [openDialog, setOpenDialog] = useState(false);
@@ -144,7 +146,7 @@ const PostDetails = () => {
                   dangerouslySetInnerHTML={{ __html: data.desc }}
                 />
                 <div className="pdShare">
-                  <p>Share this post:</p>
+                  <Title title="Share this post" />
                   <Share />
                 </div>
                 <Title title="Comments" />
@@ -175,6 +177,8 @@ const PostDetails = () => {
         <Share />
       </div>
       <BreakingNews />
+      <EmailBox emailBoxRef={emailBoxRef} />
+      <Footer />
     </div>
   );
 };

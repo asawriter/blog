@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import Footer from "../components/footers/Footer";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
+import { scroll } from "../utils/scroll";
 
 const PostSearch = () => {
   const { searchValue } = useContext(AuthContext);
@@ -38,7 +39,7 @@ const PostSearch = () => {
                   key={post._id}
                   className="link"
                   to={`/posts/${post.title}/${post._id}`}
-                  reloadDocument
+                  onClick={scroll}
                 >
                   <Post post={post} />
                 </Link>
