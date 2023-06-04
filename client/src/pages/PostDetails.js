@@ -19,6 +19,7 @@ import PostImg from "../components/posts/PostImg";
 import Loading from "../components/Loading";
 import EmailBox from "../components/EmailBox";
 import Footer from "../components/footers/Footer";
+import ShareDetail from "../components/ShareDetail";
 
 const PostDetails = ({ emailBoxRef }) => {
   const queryClient = useQueryClient();
@@ -146,8 +147,7 @@ const PostDetails = ({ emailBoxRef }) => {
                   dangerouslySetInnerHTML={{ __html: data.desc }}
                 />
                 <div className="pdShare">
-                  <Title title="Share this post" />
-                  <Share />
+                  <ShareDetail />
                 </div>
                 <Title title="Comments" />
                 <CreateComment

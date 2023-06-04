@@ -46,7 +46,10 @@ const App = () => {
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home emailBoxRef={emailBoxRef} />} />
-          <Route path="/posts" element={<PostPage />} />
+          <Route
+            path="/posts"
+            element={<PostPage emailBoxRef={emailBoxRef} />}
+          />
           <Route path="/users/:userId" element={<Profile />} />
           <Route path="/users/:userId/edit" element={<EditProfile />} />
           <Route path="/posts/search" element={<PostSearch />} />

@@ -5,8 +5,10 @@ import { AuthContext } from "../context/AuthContext";
 import makeRequest from "../services/makeRequest";
 import BreakingNews from "../components/postsAll/BreakingNews";
 import Trending from "../components/postsAll/Trending";
+import EmailBox from "../components/EmailBox";
+import Footer from "../components/footers/Footer";
 
-const PostPage = () => {
+const PostPage = ({ emailBoxRef }) => {
   const { cat, page } = useContext(AuthContext);
   const { isLoading, data, error } = useQuery(["categories", cat], () =>
     makeRequest
@@ -27,6 +29,8 @@ const PostPage = () => {
         <Trending />
       </div>
       <BreakingNews />
+      <EmailBox emailBoxRef={emailBoxRef} />
+      <Footer />
     </div>
   );
 };

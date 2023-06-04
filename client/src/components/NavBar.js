@@ -10,7 +10,7 @@ const NavBar = ({ scrollToEmailBox }) => {
     <div className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <Link to="/" className="link">
+          <Link to="/" className="link" reloadDocument>
             <img
               src="https://res.cloudinary.com/dqzwavus9/image/upload/v1681658596/blog/hacker_crjjgw.png"
               alt=""

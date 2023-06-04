@@ -51,28 +51,7 @@
           }
 
           .pdShare {
-            p {
-              margin-bottom: 8px;
-              color: #232f3e;
-              font-weight: 600;
-              font-size: 18px;
-            }
-            .share {
-              position: unset;
-              flex-direction: row;
-              gap: 20px;
-              margin-bottom: 40px;
-
-              p {
-                display: none;
-              }
-
-              .shareItem {
-                .icon {
-                  font-size: 30px;
-                }
-              }
-            }
+            margin-bottom: 30px;
           }
 
           .postLeft {

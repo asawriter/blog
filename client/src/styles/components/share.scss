@@ -1,11 +1,11 @@
 .share {
   position: absolute;
-  top: 180px;
+  top: 160px;
   left: -180px;
   flex-direction: column;
   display: flex;
-  animation: share 2s;
-  gap: 10px;
+  // animation: share 2s;
+  gap: 14px;
   list-style-type: none;
 
   p {
@@ -15,10 +15,17 @@
   }
 
   .shareItem {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
     cursor: pointer;
+
     .icon {
-      border-radius: 4px;
-      font-size: 40px;
+      font-size: 20px;
+      color: white;
     }
     &:hover {
       transform: scale(1.1);

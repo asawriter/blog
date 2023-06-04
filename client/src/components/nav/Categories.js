@@ -13,10 +13,9 @@ const Categories = () => {
 
   return (
     <ul className="categories">
-      <Link to="/" className="link" onClick={scroll}>
+      <Link to="/" className="link" onClick={scroll} reloadDocument>
         <li>Home</li>
       </Link>
-
       <li onClick={() => handleLink("Data Breaches")}>Data Breaches</li>
       <li onClick={() => handleLink("Cyber Attacks")}>Cyber Attacks</li>
       <li onClick={() => handleLink("Vulnerablilities")}>Vulnerablilities</li>
